@@ -7,7 +7,7 @@ const MedicineSchema = new Schema({
     required: true,
   },
   Description: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: String,
     required:true,
   },
   Category: {
@@ -15,15 +15,15 @@ const MedicineSchema = new Schema({
     required: true,
   },
   Quantity: {
-    type: Date,
+    type:Number,
     required: true,
   },
   MFD: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Date,
     required:true,
   },
   ExpDate: {
-    type: String,
+    type: Date,
     required: true,
   },
   User: {
