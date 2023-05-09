@@ -26,6 +26,10 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
+  Category:{
+    type: String,
+    required: true,
+  },
   Password: {
     type: String,
     required: true,

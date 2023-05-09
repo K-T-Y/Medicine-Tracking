@@ -12,7 +12,7 @@ router.route("/add").post((req, res) => {
   const District = req.body.District;
   const Address = req.body.Address;
   const Password = req.body.Password;
-
+  const Category=req.body.Category;
 
   const newUser = new UserModel({
      FirstName ,
@@ -21,7 +21,8 @@ router.route("/add").post((req, res) => {
      Phone ,
      District, 
      Address ,
-     Password 
+     Password,
+     Category
   });
 
   newUser

@@ -29,9 +29,9 @@ connectio.once("open", () => {
 });
 
 //Employee
-const QuestionRouter = require("./routes/questionRoute.js");
+const MedicineRouter = require("./routes/medicineRoute.js");
 const UserRouter = require("./routes/userRoute.js");
-app.use("/Question", QuestionRouter);
+app.use("/medicine", MedicineRouter);
 app.use("/user", UserRouter);
 
 //run the app using portd
