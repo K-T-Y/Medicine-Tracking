@@ -28,7 +28,7 @@ router.route("/add").post((req, res) => {
   newUser
     .save()
     .then(() => {
-      res.json("User Added");
+      res.json({msg:"User Added"});
     })
     .catch((err) => {
       console.log(err);
@@ -49,7 +49,7 @@ router.route("/").post((req, res) => {
       }
       else
       {
-        res.json({message:"Incorrect Email or Password"});
+        res.json({msg:"Incorrect Email or Password"});
       }
       
     })

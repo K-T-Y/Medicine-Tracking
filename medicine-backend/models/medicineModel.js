@@ -6,6 +6,10 @@ const MedicineSchema = new Schema({
     type: String,
     required: true,
   },
+  Picture:{
+  type: String,
+    
+  },
   Description: {
     type: String,
     required:true,
@@ -19,11 +23,11 @@ const MedicineSchema = new Schema({
     required: true,
   },
   MFD: {
-    type: Date,
+    type: String,
     required:true,
   },
   ExpDate: {
-    type: Date,
+    type: String,
     required: true,
   },
   User: {

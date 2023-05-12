@@ -15,6 +15,7 @@ router.route("/add").post((req, res) => {
   const MFD = req.body.MFD;
   const ExpDate = req.body.ExpDate;
   const User = req.body.User;
+  const Picture = req.body.Picture;
 
   const newMedicine = new MedicineModel({
    Name,
@@ -23,13 +24,14 @@ router.route("/add").post((req, res) => {
    Quantity,
    MFD,
    ExpDate,
-   User
+   User,
+   Picture
   });
 
   newMedicine
     .save()
     .then(() => {
-      res.json("Medicine Added");
+      res.json({msg:"Medicine Added"});
     })
     .catch((err) => {
       console.log(err);
@@ -52,25 +54,24 @@ router.route("/").get((req, res) => {
 //update
 //http://localhost:8090/Medicine/update/:id
 //Put Request
-router.route("/update/:id").put(async (req, res) => {
-  let MedicineId = req.params.id;
-  const { Content, User, createdAt } = req.body;
+router.route("/update/").post(async (req, res) => {
+  
+  const {id, Quantity } = req.body;
   const updateMedicine = {
-    Content,
-    User,
-    createdAt,
+   Quantity: Quantity
   };
 
   const update = await MedicineModel.findByIdAndUpdate(
-    MedicineId,
+    id,
     updateMedicine
+    
   )
     .then(() => {
-      res.status(200).send({ status: "Medicine Updated" });
+      res.status(200).send({ msg: "Medicine Updated" });
     })
     .catch((err) => {
       console.log(err);
-      res.status(500).send({ status: "Error with updating data" });
+      res.status(500).send({ msg: "Error with updating data" });
     });
 });
 
@@ -82,7 +83,7 @@ router.route("/delete/:id").delete(async (req, res) => {
 
   await MedicineModel.findByIdAndDelete(MedicineId)
     .then(() => {
-      res.status(200).send({ status: "Medicine deleted" });
+      res.status(200).send({ msg: "Medicine deleted" });
     })
     .catch((err) => {
       console.log(err);
@@ -90,9 +91,9 @@ router.route("/delete/:id").delete(async (req, res) => {
 });
 
 //find one of the Medicine
-router.route("/get/:id").get((req, res) => {
-  let id = req.params.id;
-  MedicineModel.findById(id)
+router.route("/get/:keyword").get((req, res) => {
+  let keyword = req.params.keyword;
+  MedicineModel.findById({Name:keyword})
     .then((Medicine) => {
       res.json(Medicine);
     })
