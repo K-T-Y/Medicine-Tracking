@@ -50,7 +50,32 @@ router.route("/").get((req, res) => {
       console.log(err);
     });
 });
-
+//Category Wise
+router.route("/get/cat").get((req, res) => {
+  let keyword = req.params.keyword;
+  let arr=[];
+ const med= MedicineModel.find()
+    .then((Medicine) => {
+      const Heart=Medicine.filter((item)=>{
+        return item.Category=="Heart"
+      })
+      const Ear=Medicine.filter((item)=>{
+        return item.Category=="Ear,Nose & Throat"
+      })
+      const Muscel=Medicine.filter((item)=>{
+        return item.Category=="Muscles & Joints"
+      })
+      const Central=Medicine.filter((item)=>{
+        return item.Category=="Central nervous System"
+      })
+      console.log(Ear)
+    res.json({"ENT":Ear , "Heart":Heart,"CNS":Central,"Muscles":Muscel})
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+   
+});
 //update
 //http://localhost:8090/Medicine/update/:id
 //Put Request
@@ -102,20 +127,6 @@ router.route("/get/:keyword").get((req, res) => {
     });
 });
 
-//Updateone
-// router.route("/updateOne/:id").put(async (req, res) => {
-//     let Medicine = await MedicineModel.findById(req.params.id);
-//     const data = {
-//         Name: req.body.Name || Medicine.Name,
-//         Address: req.body.Address || Medicine.Address,
-//         PhoneNumber: req.body.PhoneNumber || Medicine.PhoneNumber,
-//         NICNumber: req.body.NICNumber || Medicine.NICNumber,
-//         Jobtitle: req.body.Jobtitle || Medicine.Jobtitle,
-//         Salary: req.body.Salary || Medicine.Salary,
 
-//     };
-//     Medicine = await MedicineModel.findByIdAndUpdate(req.params.id, data, { new: true });
-//     res.json(Medicine);
-// });
 
 module.exports = router;
