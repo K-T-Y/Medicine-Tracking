@@ -2,10 +2,6 @@ const router = require("express").Router();
 const { request } = require("express");
 let MedicineModel = require("../models/medicineModel");
 
-//add data to Medicine table
-//./Medicine/add
-//Post request
-//http://localhost:8050/Medicine/add
 
 router.route("/add").post((req, res) => {
   const Name = req.body.Name;
@@ -36,6 +32,21 @@ router.route("/add").post((req, res) => {
     .catch((err) => {
       console.log(err);
     });
+});
+//Search
+router.route("/search").post((req, res) => {
+  const Name = req.body.Name;
+  
+  MedicineModel.find({Name:Name})
+  .then((Medicine) => {
+    res.json(Medicine);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+
+
 });
 
 //search Medicine
